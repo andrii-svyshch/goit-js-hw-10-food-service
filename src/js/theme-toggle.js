@@ -8,26 +8,27 @@ const Theme = {
 
 const { LIGHT, DARK } = Theme;
 
-const THEME = 'theme';
+const MODE = 'theme';
+const THEME = localStorage.getItem(MODE);
 
-if (localStorage.getItem(THEME) === DARK) {
+if (THEME === DARK) {
   themeToggleEl.setAttribute('checked', 'checked');
 }
 
-if (!localStorage.getItem(THEME)) {
-  localStorage.setItem(THEME, LIGHT);
+if (!THEME) {
+  localStorage.setItem(MODE, LIGHT);
 }
 
-bodyEl.classList.add(localStorage.getItem(THEME));
+bodyEl.classList.add(THEME);
 
 themeToggleEl.addEventListener('change', e => {
   if (!bodyEl.classList.contains(DARK)) {
     bodyEl.classList.remove(LIGHT);
     bodyEl.classList.add(DARK);
-    localStorage.setItem(THEME, DARK);
+    localStorage.setItem(MODE, DARK);
   } else {
     bodyEl.classList.remove(DARK);
     bodyEl.classList.add(LIGHT);
-    localStorage.setItem(THEME, LIGHT);
+    localStorage.setItem(MODE, LIGHT);
   }
 });
