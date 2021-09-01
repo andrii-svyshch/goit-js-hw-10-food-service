@@ -12,7 +12,7 @@ const MODE = 'theme';
 const THEME = localStorage.getItem(MODE);
 
 if (THEME === DARK) {
-  themeToggleEl.setAttribute('checked', 'checked');
+  themeToggleEl.checked = true;
 }
 
 if (!THEME) {
@@ -22,13 +22,12 @@ if (!THEME) {
 bodyEl.classList.add(THEME);
 
 themeToggleEl.addEventListener('change', e => {
-  if (!bodyEl.classList.contains(DARK)) {
-    bodyEl.classList.remove(LIGHT);
-    bodyEl.classList.add(DARK);
+  bodyEl.classList.toggle(LIGHT);
+  bodyEl.classList.toggle(DARK);
+
+  if (bodyEl.classList.contains(DARK)) {
     localStorage.setItem(MODE, DARK);
   } else {
-    bodyEl.classList.remove(DARK);
-    bodyEl.classList.add(LIGHT);
     localStorage.setItem(MODE, LIGHT);
   }
 });
